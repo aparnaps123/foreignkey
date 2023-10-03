@@ -1,0 +1,126 @@
+{% extends 'navbar.html' %}
+{% block content %}
+{% load static %}
+<style>
+* {
+  box-sizing: border-box;
+  
+}
+body {
+    background-image: url('{% static "images/student3.webp" %}');
+    background-repeat: no-repeat fixed;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646; 
+  
+  }
+
+    
+input[type=text],input[type=number],input[type=date], select, textarea {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 10px 16px 15px 30px;
+  display: inline-block;
+  color:  #006C75;
+  font-family: 'Lucida Sans';
+  font-style: italic;
+}
+
+
+button[type=submit] {
+  background-color:  #006C75;
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  float: center;
+  width: 50;
+  opacity: 0.9;
+
+}
+
+button[type=submit]:hover {
+  background-color:  #006C75;
+}
+
+.container {
+  /* border-radius: 25px; */
+  background-color: white;
+  padding: 8px;
+  width: 500px;
+  opacity: 0.8;
+  padding-right: 10px;
+  padding-left: 10px;
+  float: right;
+  margin-right: 50px;
+  margin-top: 30px;
+  border-radius: 15% 10%;
+  
+}
+
+
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+    text-align: center;
+    
+  }
+}
+
+</style>
+</head>
+<body>
+
+
+<form action="{% url 'add_studentdb' %}" method="post">
+    {% csrf_token %}
+  <div class="container">
+    <h1 style="color:  #006C75; margin-left: 30px; font-family: 'Lucida Sans'; font-style: italic;">STUDENT <br>REGISTRATION</h1><br>
+
+
+    <label for="student_name"><b>NAME </b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="text" placeholder="" name="student_name" required><br><br>
+
+    <label for="address"><b> ADDRESS</b></label>
+    <input type="text" placeholder="" name="student_address" required><br><br>
+
+    
+    <label for="age"><b>AGE</b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="number" placeholder="" name="student_age" required><br><br>
+
+
+    <label for="join_date"><b>JOINING DATE</b></label>
+    <input type="date" placeholder="" name="joining_date" required><br><br>
+
+    <label for="coursename"><b>COURSES</b></label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <select name="course" id="sel">
+      {% for c in course %}
+      <option value="{{c.id}}">{{c.course_name}}</option>
+       {% endfor %}
+    </select><br><br>
+ <center>
+<button type="submit" class="registerbtn">SUBMIT</button>
+</center>
+</div>
+</form>
+
+{% endblock %}
